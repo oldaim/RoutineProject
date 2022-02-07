@@ -4,6 +4,7 @@ import com.oldaim.routineproject.entity.Member;
 import com.oldaim.routineproject.entity.work.CheckList;
 import com.oldaim.routineproject.entity.work.DailyToDo;
 import com.oldaim.routineproject.entity.work.ToDoList;
+import com.oldaim.routineproject.entity.work.WeeklyToDo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +20,10 @@ class ToDoListRepositoryTest {
     DailyToDoRepository dailyToDoRepository;
     @Autowired
     MemberRepository memberRepository;
+    @Autowired
+    WeeklyToDoRepository weeklyToDoRepository;
 
+    @Transactional
     @Test
     public void ToDoList_저장_테스트() throws Exception{
 
@@ -29,18 +33,30 @@ class ToDoListRepositoryTest {
                 .memberPassword("dgk0911")
                 .build();
 
-        DailyToDo toDoList = DailyToDo.builder()
-                .content("ss")
+        DailyToDo toDoListDay = DailyToDo.builder()
+                .content("hello")
                 .checkList(CheckList.UNDO)
-                .startTime(1L)
-                .endTime(1L)
-                .resetTime(1L)
                 .member(member)
+                .startTime(1)
+                .startMin(17)
+                .endTime(15)
+                .endMin(2)
                 .build();
 
+        WeeklyToDo toDoListWeek = WeeklyToDo.builder()
+                .content("hello")
+                .checkList(CheckList.UNDO)
+                .member(member)
+                .startTime(2)
+                .startMin(1)
+                .endTime(7)
+                .endMin(5)
+                .day("Monday")
+                .build();
         //when
         memberRepository.save(member);
-        dailyToDoRepository.save(toDoList);
+        dailyToDoRepository.save(toDoListDay);
+        weeklyToDoRepository.save(toDoListWeek);
 
         //then
 

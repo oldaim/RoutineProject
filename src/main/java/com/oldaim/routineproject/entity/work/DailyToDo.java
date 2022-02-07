@@ -14,20 +14,25 @@ import javax.persistence.Entity;
 public class DailyToDo extends ToDoList {
 
     @Column
-    private Long startTime;
+    private Integer startTime;
 
     @Column
-    private Long endTime;
+    private Integer startMin;
 
     @Column
-    private Long resetTime;
+    private Integer endTime;
+
+    @Column
+    private Integer endMin;
+
 
     @Builder
-    public DailyToDo(String content, CheckList checkList, Member member, Long startTime, Long endTime, Long resetTime) {
+    public DailyToDo(String content, CheckList checkList, Member member, Integer startTime,
+                     Integer startMin, Integer endTime, Integer endMin) {
         super(content, checkList, member);
         this.startTime = startTime;
+        this.startMin = startMin;
         this.endTime = endTime;
-        this.resetTime = resetTime;
+        this.endMin = endMin;
     }
-
 }
