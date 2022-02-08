@@ -35,4 +35,15 @@ public class DailyToDo extends ToDoList {
         this.endTime = endTime;
         this.endMin = endMin;
     }
+
+    public void changeDailyToDo(String content, Integer startTime, Integer startMin, Integer endTime, Integer endMin) {
+
+        this.changeContent(content);
+        this.startTime = startTime;
+        this.startMin = startMin;
+        this.endTime = endTime;
+        this.endMin = endMin;
+    }
+
+
 }
