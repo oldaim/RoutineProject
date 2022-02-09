@@ -166,5 +166,52 @@ class DailyToDoServiceTest {
 
     }
 
+    @Test
+    public void daily_조회_조건_테스트 () throws Exception{
+        //given
+        Member memberDummy = Member
+                .builder()
+                .memberId("oldaim")
+                .memberPassword("1111")
+                .build();
+
+        memberRepository.save(memberDummy);
+
+        for (int i = 0; i < 10; i++) {
+            DailyToDoDto dtoDummy;
+
+            if(i%2 == 0) {
+                dtoDummy = DailyToDoDto
+                        .builder()
+                        .content("hello world")
+                        .checkList(CheckList.UNDO)
+                        .startTime(1 + i)
+                        .startMin(30)
+                        .endTime(7 + i)
+                        .endMin(30)
+                        .build();
+            }
+
+            else{
+                dtoDummy = DailyToDoDto
+                        .builder()
+                        .content("hello world")
+                        .checkList(CheckList.DO)
+                        .startTime(1 + i)
+                        .startMin(30)
+                        .endTime(7 + i)
+                        .endMin(30)
+                        .build();
+            }
+
+            dailyToDoService.dailySave(dtoDummy, memberDummy);
+        }
+        //when
+        List<DailyToDoDto> dtoList = dailyToDoService.dailyFindAll(memberDummy.getId());
+
+        //then
+        assertThat(dtoList.size()).isEqualTo(5);
+    }
+
 
 }

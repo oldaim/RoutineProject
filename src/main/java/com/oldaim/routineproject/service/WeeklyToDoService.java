@@ -3,6 +3,7 @@ package com.oldaim.routineproject.service;
 import com.oldaim.routineproject.Repository.WeeklyToDoRepository;
 import com.oldaim.routineproject.dto.WeeklyToDoDto;
 import com.oldaim.routineproject.entity.Member;
+import com.oldaim.routineproject.entity.work.CheckList;
 import com.oldaim.routineproject.entity.work.WeeklyToDo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -46,7 +47,9 @@ public class WeeklyToDoService {
         List<WeeklyToDoDto> dtoList = new ArrayList<>();
 
         for (WeeklyToDo weekly : weeklyEntityList) {
-            dtoList.add(weeklyEntityToDto(weekly));
+            if(weekly.getCheckList() == CheckList.UNDO) {
+                dtoList.add(weeklyEntityToDto(weekly));
+            }
         }
 
         return dtoList;

@@ -3,6 +3,7 @@ package com.oldaim.routineproject.service;
 import com.oldaim.routineproject.Repository.DailyToDoRepository;
 import com.oldaim.routineproject.dto.DailyToDoDto;
 import com.oldaim.routineproject.entity.Member;
+import com.oldaim.routineproject.entity.work.CheckList;
 import com.oldaim.routineproject.entity.work.DailyToDo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -49,7 +50,9 @@ public class DailyToDoService {
        List<DailyToDoDto> dtoList = new ArrayList<>();
 
         for (DailyToDo daily : dailyEntityList) {
-            dtoList.add(dailyEntityToDto(daily));
+            if(daily.getCheckList() == CheckList.UNDO) {
+                dtoList.add(dailyEntityToDto(daily));
+            }
         }
 
         return dtoList;
