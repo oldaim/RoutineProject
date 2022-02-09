@@ -102,7 +102,7 @@ class DailyToDoServiceTest {
 
         Long oldId = dailyToDoService.dailySave(dtoOld,memberDummy);
 
-        Long newId = dailyToDoService.dailyModify(memberDummy,dtoOld,dtoNew);
+        Long newId = dailyToDoService.dailyModify(dtoOld,dtoNew);
 
         Optional<DailyToDo> dummyEntity = dailyToDoRepository.findById(newId);
 

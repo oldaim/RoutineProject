@@ -29,7 +29,7 @@ public class DailyToDoService {
 
     }
     //수정
-    public Long dailyModify(Member member ,DailyToDoDto dtoOld, DailyToDoDto dtoNew){
+    public Long dailyModify(DailyToDoDto dtoOld, DailyToDoDto dtoNew){
 
        DailyToDo dailyToDo =  dailyToDoRepository.findByContent(dtoOld.getContent()
                ,dtoOld.getStartTime(),dtoOld.getStartMin());

@@ -38,4 +38,16 @@ public class WeeklyToDo extends ToDoList{
         this.endMin = endMin;
         this.day = day;
     }
+
+    public void changeWeeklyToDo(String content, Integer startTime, Integer startMin,
+                                 Integer endTime, Integer endMin, String day) {
+
+        this.changeContent(content);
+        this.startTime = startTime;
+        this.startMin = startMin;
+        this.endTime = endTime;
+        this.endMin = endMin;
+        this.day = day;
+
+    }
 }
