@@ -35,11 +35,7 @@ class DailyToDoServiceTest {
     public void Daily_저장_테스트(){
 
         //given
-        Member memberDummy = Member
-                .builder()
-                .memberId("oldaim")
-                .memberPassword("1111")
-                .build();
+        Member memberDummy = getMember();
 
         DailyToDoDto dtoDummy = DailyToDoDto
                 .builder()
@@ -72,11 +68,7 @@ class DailyToDoServiceTest {
     public void Daily_수정_테스트() throws Exception{
 
         //given
-        Member memberDummy = Member
-                .builder()
-                .memberId("oldaim")
-                .memberPassword("1111")
-                .build();
+        Member memberDummy = getMember();
 
         DailyToDoDto dtoOld = DailyToDoDto
                 .builder()
@@ -124,11 +116,7 @@ class DailyToDoServiceTest {
     public void daily_조회_삭제_테스트 () throws Exception{
 
         //given
-        Member memberDummy = Member
-                .builder()
-                .memberId("oldaim")
-                .memberPassword("1111")
-                .build();
+        Member memberDummy = getMember();
 
         memberRepository.save(memberDummy);
 
@@ -169,11 +157,7 @@ class DailyToDoServiceTest {
     @Test
     public void daily_조회_조건_테스트 () throws Exception{
         //given
-        Member memberDummy = Member
-                .builder()
-                .memberId("oldaim")
-                .memberPassword("1111")
-                .build();
+        Member memberDummy = getMember();
 
         memberRepository.save(memberDummy);
 
@@ -211,6 +195,15 @@ class DailyToDoServiceTest {
 
         //then
         assertThat(dtoList.size()).isEqualTo(5);
+    }
+
+
+    private Member getMember() {
+        return Member
+                .builder()
+                .memberId("oldaim")
+                .memberPassword("1111")
+                .build();
     }
 
 
