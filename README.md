@@ -32,26 +32,5 @@
     - 기본적으로 ID 및 Password 로 로그인 하는 방식을 구현 할 것이고 이를 위한 화면이 따로 필요할 것으로 예상된다.
     - 추가적으로 가능하다면 구글 과 같은 소셜 로그인을 기능에 추가하는 방안이 고려된다. (선택)
 
-### 프로젝트 일정
 
-1. DB 연관관계 설정
-    1. Member
-        - id
-        - memberId
-        - memberPassword
-        - always (매일할일 : 연관관계 설정)
-        - weekly (매주할일 : 연관관계 설정)
-        - wishlist (미정할일 : 연관관계 설정)
-    2. work (추상 메서드)
-        - id
-        - content
-        - startTime
-        - endTime
-        - resetTime
-    3. always
-    4. weekly
-        - resetDay
-        - Day (실행요일)
-    5. wishList
-        - Category
-        - start , end , reset 상속 x
+
