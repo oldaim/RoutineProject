@@ -1,11 +1,9 @@
 package com.oldaim.routineproject.service;
 
 import com.oldaim.routineproject.Repository.WishListRepository;
-import com.oldaim.routineproject.dto.WeeklyToDoDto;
 import com.oldaim.routineproject.dto.WishListDto;
 import com.oldaim.routineproject.entity.Member;
 import com.oldaim.routineproject.entity.work.CheckList;
-import com.oldaim.routineproject.entity.work.WeeklyToDo;
 import com.oldaim.routineproject.entity.work.WishList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
