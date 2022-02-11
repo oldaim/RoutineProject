@@ -1,13 +1,10 @@
 package com.oldaim.routineproject.controller;
 
-import com.oldaim.routineproject.Repository.MemberRepository;
 import com.oldaim.routineproject.config.jwt.JwtAuthenticProvider;
 import com.oldaim.routineproject.dto.MemberInfoDto;
 import com.oldaim.routineproject.entity.Member;
+import com.oldaim.routineproject.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,40 +12,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Collections;
 
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/auth")
 public class UserLoginController {
-    final MemberRepository memberRepository;
-    final PasswordEncoder passwordEncoder;
-    final JwtAuthenticProvider jwtAuthenticationProvider;
 
-    public UserLoginController(MemberRepository memberRepository, PasswordEncoder passwordEncoder, JwtAuthenticProvider jwtAuthenticationProvider) {
-        this.memberRepository = memberRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtAuthenticationProvider = jwtAuthenticationProvider;
-    }
+    private final MemberService memberService;
+    private final JwtAuthenticProvider jwtAuthenticationProvider;
+
+
 
     @PostMapping("/join") // 회원가입
     public void join(@RequestBody MemberInfoDto dto){
 
-        memberRepository.save(Member.builder()
-                .memberId(dto.getMemberId())
-                .memberPassword(passwordEncoder.encode(dto.getMemberPW()))
-                .roles(Collections.singletonList("ROLE_USER"))
-                .build());
+        memberService.memberSignUp(dto);
 
     }
 
     @PostMapping("/login") //로그인
-    public void login(@RequestBody MemberInfoDto user, HttpServletResponse response) {
-        Member member = memberRepository.findByMemberId(user.getMemberId())
-                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 E-MAIL 입니다."));
-        if (!passwordEncoder.matches(user.getMemberPW(), member.getPassword())) {
-            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
-        }
+    public void login(@RequestBody MemberInfoDto dto, HttpServletResponse response) {
+
+        Member member = memberService.memberLogin(dto);
 
         String token = jwtAuthenticationProvider.createToken(member.getUsername(), member.getRoles());
         response.setHeader("X-AUTH-TOKEN", token);
@@ -63,12 +48,14 @@ public class UserLoginController {
 
     @PostMapping("/logout") //로그아웃
     public void logout(HttpServletResponse response){
+
         Cookie cookie = new Cookie("X-AUTH-TOKEN", null);
         cookie.setHttpOnly(true);
         cookie.setSecure(false);
         cookie.setMaxAge(0);
         cookie.setPath("/");
         response.addCookie(cookie);
+
     }
 
 

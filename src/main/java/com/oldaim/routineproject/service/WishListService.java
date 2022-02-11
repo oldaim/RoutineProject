@@ -1,9 +1,11 @@
 package com.oldaim.routineproject.service;
 
 import com.oldaim.routineproject.Repository.WishListRepository;
+import com.oldaim.routineproject.dto.DailyToDoDto;
 import com.oldaim.routineproject.dto.WishListDto;
 import com.oldaim.routineproject.entity.Member;
 import com.oldaim.routineproject.entity.work.CheckList;
+import com.oldaim.routineproject.entity.work.DailyToDo;
 import com.oldaim.routineproject.entity.work.WishList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -62,6 +64,14 @@ public class WishListService {
 
     }
 
+    public void wishListUndoToDo(DailyToDoDto dto){
+        WishList wishListEntity = wishListRepository.findByContent(dto.getContent());
+
+        wishListEntity.changeCheckListUndoToDo();
+
+        wishListRepository.save(wishListEntity);
+    }
+
     private WishListDto wishEntityToDto(WishList wishList) {
         return WishListDto
                 .builder()
@@ -74,7 +84,7 @@ public class WishListService {
         return WishList
                 .builder()
                 .content(dto.getContent())
-                .checkList(dto.getCheckList())
+                .checkList(CheckList.UNDO)
                 .member(member)
                 .build();
     }

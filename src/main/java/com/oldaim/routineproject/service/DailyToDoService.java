@@ -67,13 +67,23 @@ public class DailyToDoService {
         dailyToDoRepository.deleteById(deleteEntityId);
     }
 
+    // Undo -> do
+    public void dailyUndoToDo(DailyToDoDto dto){
+       DailyToDo dailyEntity = dailyToDoRepository.findByContent(dto.getContent(),
+               dto.getStartTime(), dto.getStartMin());
+
+       dailyEntity.changeCheckListUndoToDo();
+
+       dailyToDoRepository.save(dailyEntity);
+    }
+
 
     private DailyToDo dailyDtoToEntity(DailyToDoDto dto, Member member){
 
         DailyToDo dailyToDo = DailyToDo
                 .builder()
                 .content(dto.getContent())
-                .checkList(dto.getCheckList())
+                .checkList(CheckList.UNDO)
                 .startTime(dto.getStartTime())
                 .startMin(dto.getStartMin())
                 .endTime(dto.getEndTime())

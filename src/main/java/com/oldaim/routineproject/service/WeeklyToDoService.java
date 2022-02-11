@@ -1,9 +1,11 @@
 package com.oldaim.routineproject.service;
 
 import com.oldaim.routineproject.Repository.WeeklyToDoRepository;
+import com.oldaim.routineproject.dto.DailyToDoDto;
 import com.oldaim.routineproject.dto.WeeklyToDoDto;
 import com.oldaim.routineproject.entity.Member;
 import com.oldaim.routineproject.entity.work.CheckList;
+import com.oldaim.routineproject.entity.work.DailyToDo;
 import com.oldaim.routineproject.entity.work.WeeklyToDo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -63,12 +65,21 @@ public class WeeklyToDoService {
         weeklyToDoRepository.deleteById(deleteEntityId);
     }
 
+    public void weeklyUndoToDo(WeeklyToDoDto dto){
+        WeeklyToDo weeklyEntity = weeklyToDoRepository.findByContent(dto.getContent(),
+                dto.getStartTime(), dto.getStartMin(),dto.getDay());
+
+        weeklyEntity.changeCheckListUndoToDo();
+
+        weeklyToDoRepository.save(weeklyEntity);
+    }
+
     private WeeklyToDo weeklyDtoToEntity(WeeklyToDoDto dto, Member member){
 
         WeeklyToDo weeklyToDo = WeeklyToDo
                 .builder()
                 .content(dto.getContent())
-                .checkList(dto.getCheckList())
+                .checkList(CheckList.UNDO)
                 .startTime(dto.getStartTime())
                 .startMin(dto.getStartMin())
                 .endTime(dto.getEndTime())

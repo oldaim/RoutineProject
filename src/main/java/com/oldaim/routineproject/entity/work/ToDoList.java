@@ -38,4 +38,6 @@ public abstract class ToDoList {
     public void changeContent(String content){
         this.content = content;
     }
+
+    public void changeCheckListUndoToDo(){this.checkList = CheckList.DO;}
 }
