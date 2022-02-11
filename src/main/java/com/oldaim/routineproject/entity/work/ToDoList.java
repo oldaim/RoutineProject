@@ -13,7 +13,7 @@ import javax.persistence.*;
 public abstract class ToDoList {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
@@ -34,4 +34,10 @@ public abstract class ToDoList {
         this.checkList = checkList;
         this.member = member;
     }
+
+    public void changeContent(String content){
+        this.content = content;
+    }
+
+    public void changeCheckListUndoToDo(){this.checkList = CheckList.DO;}
 }

@@ -3,16 +3,11 @@ package com.oldaim.routineproject.Repository;
 import com.oldaim.routineproject.entity.Member;
 import com.oldaim.routineproject.entity.work.CheckList;
 import com.oldaim.routineproject.entity.work.DailyToDo;
-import com.oldaim.routineproject.entity.work.ToDoList;
 import com.oldaim.routineproject.entity.work.WeeklyToDo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
 class ToDoListRepositoryTest {
