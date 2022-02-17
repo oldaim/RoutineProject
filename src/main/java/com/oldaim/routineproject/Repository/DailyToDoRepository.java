@@ -1,5 +1,6 @@
 package com.oldaim.routineproject.Repository;
 
+import com.oldaim.routineproject.entity.work.CheckList;
 import com.oldaim.routineproject.entity.work.DailyToDo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +16,7 @@ public interface DailyToDoRepository extends JpaRepository<DailyToDo, Long> {
 
     @Query("SELECT d FROM  DailyToDo d WHERE d.member.id =?1")
     List<DailyToDo> findAllByMember(Long id);
+
+    @Query("SELECT d FROM  DailyToDo d WHERE d.checkList = ?1")
+    List<DailyToDo> findByCheckList(CheckList checkList);
 }

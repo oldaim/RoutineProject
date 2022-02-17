@@ -6,6 +6,7 @@ import com.oldaim.routineproject.dto.DailyToDoDto;
 import com.oldaim.routineproject.entity.Member;
 import com.oldaim.routineproject.entity.work.CheckList;
 import com.oldaim.routineproject.entity.work.DailyToDo;
+import com.oldaim.routineproject.entity.work.WorkCategory;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
-
+@Transactional
 @SpringBootTest
 @Log4j2
 class DailyToDoServiceTest {
@@ -190,6 +191,40 @@ class DailyToDoServiceTest {
 
         //then
         assertThat(dtoList.size()).isEqualTo(10);
+    }
+
+    @Test
+    public void cron_활용_상태초기화_테스트 () throws Exception{
+
+        //given
+
+        Member memberDummy = getMember();
+
+        memberRepository.save(memberDummy);
+
+        IntStream.range(0, 10).mapToObj(i -> DailyToDo
+                .builder()
+                .member(memberDummy)
+                .content("Test")
+                .workCategory(WorkCategory.Daily)
+                .checkList(CheckList.DO)
+                .startTime(1 + i)
+                .startMin(30 + i)
+                .endTime(7 + i)
+                .endMin(30 + i)
+                .build()).forEach(dailyEntity -> dailyToDoRepository.save(dailyEntity));
+
+        //when
+        dailyToDoService.initializationDailyStatus();
+
+        //then
+        List<DailyToDo> dailyToDoList = dailyToDoRepository.findAllByMember(memberDummy.getId());
+
+        for (DailyToDo daily : dailyToDoList) {
+            assertThat(daily.getCheckList()).isEqualTo(CheckList.UNDO);
+        }
+
+
     }
 
 

@@ -8,6 +8,7 @@ import com.oldaim.routineproject.entity.work.WeeklyToDo;
 import com.oldaim.routineproject.entity.work.WorkCategory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -71,6 +72,18 @@ public class WeeklyToDoService {
         weeklyEntity.changeCheckListUndoToDo();
 
         weeklyToDoRepository.save(weeklyEntity);
+    }
+
+    @Scheduled(cron = "0 0 6 * * 1",zone = "Asia/Seoul")
+    public void initializationWeeklyStatus(){
+        List<WeeklyToDo> changeStatusList = weeklyToDoRepository.findByStatus(CheckList.DO);
+
+        for (WeeklyToDo weekly : changeStatusList) {
+
+            weekly.changeCheckListDoToUndo();
+
+            weeklyToDoRepository.save(weekly);
+        }
     }
 
     private WeeklyToDo weeklyDtoToEntity(WeeklyToDoDto dto, Member member){
