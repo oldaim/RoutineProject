@@ -1,12 +1,11 @@
 package com.oldaim.routineproject.service;
 
 import com.oldaim.routineproject.Repository.WishListRepository;
-import com.oldaim.routineproject.dto.DailyToDoDto;
 import com.oldaim.routineproject.dto.WishListDto;
 import com.oldaim.routineproject.entity.Member;
 import com.oldaim.routineproject.entity.work.CheckList;
-import com.oldaim.routineproject.entity.work.DailyToDo;
 import com.oldaim.routineproject.entity.work.WishList;
+import com.oldaim.routineproject.entity.work.WorkCategory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -64,7 +63,7 @@ public class WishListService {
 
     }
 
-    public void wishListUndoToDo(DailyToDoDto dto){
+    public void wishListUndoToDo(WishListDto dto){
         WishList wishListEntity = wishListRepository.findByContent(dto.getContent());
 
         wishListEntity.changeCheckListUndoToDo();
@@ -75,8 +74,9 @@ public class WishListService {
     private WishListDto wishEntityToDto(WishList wishList) {
         return WishListDto
                 .builder()
-                .checkList(wishList.getCheckList())
+                .checkList(wishList.getCheckList().name())
                 .content(wishList.getContent())
+                .workCategory(wishList.getWorkCategory().name())
                 .build();
     }
 
@@ -84,6 +84,7 @@ public class WishListService {
         return WishList
                 .builder()
                 .content(dto.getContent())
+                .workCategory(WorkCategory.WishList)
                 .checkList(CheckList.UNDO)
                 .member(member)
                 .build();

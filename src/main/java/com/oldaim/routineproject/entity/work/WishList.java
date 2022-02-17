@@ -14,8 +14,7 @@ public class WishList extends ToDoList{
 
 
     @Builder
-    public WishList(String content, CheckList checkList, Member member) {
-        super(content, checkList, member);
+    public WishList(Long id, String content, CheckList checkList, WorkCategory workCategory, Member member) {
+        super(id, content, checkList, workCategory, member);
     }
-
 }

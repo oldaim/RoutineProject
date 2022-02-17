@@ -19,7 +19,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
-@Transactional
+
 @SpringBootTest
 @Log4j2
 class DailyToDoServiceTest {
@@ -40,7 +40,7 @@ class DailyToDoServiceTest {
         DailyToDoDto dtoDummy = DailyToDoDto
                 .builder()
                 .content("hello world")
-                .checkList(CheckList.UNDO)
+                .checkList("UNDO")
                 .startTime(1)
                 .startMin(30)
                 .endTime(7)
@@ -73,7 +73,6 @@ class DailyToDoServiceTest {
         DailyToDoDto dtoOld = DailyToDoDto
                 .builder()
                 .content("hello world")
-                .checkList(CheckList.UNDO)
                 .startTime(1)
                 .startMin(30)
                 .endTime(7)
@@ -83,7 +82,6 @@ class DailyToDoServiceTest {
         DailyToDoDto dtoNew = DailyToDoDto
                 .builder()
                 .content("Not hello world")
-                .checkList(CheckList.UNDO)
                 .startTime(2)
                 .startMin(30)
                 .endTime(5)
@@ -123,7 +121,6 @@ class DailyToDoServiceTest {
         IntStream.range(0, 10).mapToObj(i -> DailyToDoDto
                 .builder()
                 .content("hello world")
-                .checkList(CheckList.UNDO)
                 .startTime(1 + i)
                 .startMin(30)
                 .endTime(7 + i)
@@ -133,7 +130,6 @@ class DailyToDoServiceTest {
         DailyToDoDto dtoAboutDelete = DailyToDoDto
                 .builder()
                 .content("hello world")
-                .checkList(CheckList.UNDO)
                 .startTime(1)
                 .startMin(30)
                 .endTime(7)
@@ -168,7 +164,6 @@ class DailyToDoServiceTest {
                 dtoDummy = DailyToDoDto
                         .builder()
                         .content("hello world")
-                        .checkList(CheckList.UNDO)
                         .startTime(1 + i)
                         .startMin(30)
                         .endTime(7 + i)
@@ -180,12 +175,12 @@ class DailyToDoServiceTest {
                 dtoDummy = DailyToDoDto
                         .builder()
                         .content("hello world")
-                        .checkList(CheckList.DO)
                         .startTime(1 + i)
                         .startMin(30)
                         .endTime(7 + i)
                         .endMin(30)
                         .build();
+
             }
 
             dailyToDoService.dailySave(dtoDummy, memberDummy);
@@ -194,7 +189,7 @@ class DailyToDoServiceTest {
         List<DailyToDoDto> dtoList = dailyToDoService.dailyFindAll(memberDummy.getId());
 
         //then
-        assertThat(dtoList.size()).isEqualTo(5);
+        assertThat(dtoList.size()).isEqualTo(10);
     }
 
 

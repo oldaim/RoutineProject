@@ -1,6 +1,5 @@
 package com.oldaim.routineproject.dto;
 
-import com.oldaim.routineproject.entity.work.CheckList;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -9,8 +8,10 @@ import lombok.Getter;
 public class WeeklyToDoDto {
     //content
     private String content;
+
+    private String workCategory;
     //checkList
-    private CheckList checkList;
+    private String checkList;
     //startTime -Integer
     private Integer startTime;
     //startMin

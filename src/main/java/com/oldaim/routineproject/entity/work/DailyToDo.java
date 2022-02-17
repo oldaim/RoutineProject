@@ -25,16 +25,18 @@ public class DailyToDo extends ToDoList {
     @Column
     private Integer endMin;
 
-
     @Builder
-    public DailyToDo(String content, CheckList checkList, Member member, Integer startTime,
-                     Integer startMin, Integer endTime, Integer endMin) {
-        super(content, checkList, member);
+    public DailyToDo(Long id, String content, CheckList checkList, WorkCategory workCategory,
+                     Member member, Integer startTime, Integer startMin, Integer endTime, Integer endMin) {
+        super(id, content, checkList, workCategory, member);
         this.startTime = startTime;
         this.startMin = startMin;
         this.endTime = endTime;
         this.endMin = endMin;
     }
+
+
+
 
     public void changeDailyToDo(String content, Integer startTime, Integer startMin, Integer endTime, Integer endMin) {
 

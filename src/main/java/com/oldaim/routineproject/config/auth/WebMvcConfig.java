@@ -1,10 +1,11 @@
 package com.oldaim.routineproject.config.auth;
 
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Component
+
+@Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
@@ -12,6 +13,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .exposedHeaders("X-AUTH-TOKEN")
                 .allowCredentials(true)
+                .allowedMethods("POST","GET")
                 .allowedOrigins("http://localhost:3000");
     }
 
