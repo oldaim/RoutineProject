@@ -8,6 +8,7 @@ import com.oldaim.routineproject.entity.work.DailyToDo;
 import com.oldaim.routineproject.entity.work.WorkCategory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -76,6 +77,18 @@ public class DailyToDoService {
        dailyEntity.changeCheckListUndoToDo();
 
        dailyToDoRepository.save(dailyEntity);
+    }
+
+    @Scheduled(cron = "0 0 6 * * ?",zone = "Asia/Seoul")
+    public void initializationDailyStatus(){
+        List<DailyToDo> changeStatusList = dailyToDoRepository.findByCheckList(CheckList.DO);
+
+        for (DailyToDo daily : changeStatusList) {
+
+            daily.changeCheckListDoToUndo();
+
+            dailyToDoRepository.save(daily);
+        }
     }
 
 

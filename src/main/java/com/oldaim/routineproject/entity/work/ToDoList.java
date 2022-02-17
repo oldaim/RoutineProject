@@ -43,4 +43,6 @@ public abstract class ToDoList {
     }
 
     public void changeCheckListUndoToDo(){this.checkList = CheckList.DO;}
+
+    public void changeCheckListDoToUndo(){this.checkList = CheckList.UNDO;}
 }

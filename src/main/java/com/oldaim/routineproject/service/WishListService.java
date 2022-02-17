@@ -71,6 +71,8 @@ public class WishListService {
         wishListRepository.save(wishListEntity);
     }
 
+
+
     private WishListDto wishEntityToDto(WishList wishList) {
         return WishListDto
                 .builder()
