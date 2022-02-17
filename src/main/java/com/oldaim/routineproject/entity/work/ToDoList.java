@@ -19,19 +19,22 @@ public abstract class ToDoList {
     @Column
     private String content;
 
-
     @Column
     private CheckList checkList;
+
+    @Column
+    private  WorkCategory workCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mem_id")
     private Member member;
 
 
-    public ToDoList(String content, CheckList checkList, Member member) {
-
+    public ToDoList(Long id, String content, CheckList checkList, WorkCategory workCategory, Member member) {
+        this.id = id;
         this.content = content;
         this.checkList = checkList;
+        this.workCategory = workCategory;
         this.member = member;
     }
 

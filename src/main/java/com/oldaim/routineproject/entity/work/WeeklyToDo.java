@@ -29,15 +29,17 @@ public class WeeklyToDo extends ToDoList{
     private String day;
 
     @Builder
-    public WeeklyToDo(String content, CheckList checkList, Member member,
-                      Integer startTime, Integer startMin, Integer endTime, Integer endMin, String day) {
-        super(content, checkList, member);
+    public WeeklyToDo(Long id, String content, CheckList checkList, WorkCategory workCategory,
+                      Member member, Integer startTime, Integer startMin, Integer endTime, Integer endMin, String day) {
+        super(id, content, checkList, workCategory, member);
         this.startTime = startTime;
         this.startMin = startMin;
         this.endTime = endTime;
         this.endMin = endMin;
         this.day = day;
     }
+
+
 
     public void changeWeeklyToDo(String content, Integer startTime, Integer startMin,
                                  Integer endTime, Integer endMin, String day) {

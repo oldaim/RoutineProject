@@ -5,6 +5,7 @@ import com.oldaim.routineproject.dto.DailyToDoDto;
 import com.oldaim.routineproject.entity.Member;
 import com.oldaim.routineproject.entity.work.CheckList;
 import com.oldaim.routineproject.entity.work.DailyToDo;
+import com.oldaim.routineproject.entity.work.WorkCategory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -83,6 +84,7 @@ public class DailyToDoService {
         DailyToDo dailyToDo = DailyToDo
                 .builder()
                 .content(dto.getContent())
+                .workCategory(WorkCategory.Daily)
                 .checkList(CheckList.UNDO)
                 .startTime(dto.getStartTime())
                 .startMin(dto.getStartMin())
@@ -99,7 +101,8 @@ public class DailyToDoService {
         DailyToDoDto dto = DailyToDoDto
                 .builder()
                 .content(daily.getContent())
-                .checkList(daily.getCheckList())
+                .checkList(daily.getCheckList().name())
+                .workCategory(daily.getWorkCategory().name())
                 .startTime(daily.getStartTime())
                 .startMin(daily.getStartMin())
                 .endTime(daily.getEndTime())

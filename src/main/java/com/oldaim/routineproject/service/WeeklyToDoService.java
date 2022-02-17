@@ -1,12 +1,11 @@
 package com.oldaim.routineproject.service;
 
 import com.oldaim.routineproject.Repository.WeeklyToDoRepository;
-import com.oldaim.routineproject.dto.DailyToDoDto;
 import com.oldaim.routineproject.dto.WeeklyToDoDto;
 import com.oldaim.routineproject.entity.Member;
 import com.oldaim.routineproject.entity.work.CheckList;
-import com.oldaim.routineproject.entity.work.DailyToDo;
 import com.oldaim.routineproject.entity.work.WeeklyToDo;
+import com.oldaim.routineproject.entity.work.WorkCategory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -79,6 +78,7 @@ public class WeeklyToDoService {
         WeeklyToDo weeklyToDo = WeeklyToDo
                 .builder()
                 .content(dto.getContent())
+                .workCategory(WorkCategory.Weekly)
                 .checkList(CheckList.UNDO)
                 .startTime(dto.getStartTime())
                 .startMin(dto.getStartMin())
@@ -96,7 +96,8 @@ public class WeeklyToDoService {
        WeeklyToDoDto dto = WeeklyToDoDto
                .builder()
                .content(weekly.getContent())
-               .checkList(weekly.getCheckList())
+               .checkList(weekly.getCheckList().name())
+               .workCategory(weekly.getWorkCategory().name())
                .startTime(weekly.getStartTime())
                .startMin(weekly.getStartMin())
                .endTime(weekly.getEndTime())
