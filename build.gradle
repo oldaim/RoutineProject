@@ -26,8 +26,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     //데이터 베이스 관련 의존성
-    runtimeOnly 'com.h2database:h2:2.1.210'
-    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client' // MariaDB
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.7.3' // MariaDB
     implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.0'
     //스프링 시큐리티 관련 의존성
     implementation 'org.springframework.boot:spring-boot-starter-security'
