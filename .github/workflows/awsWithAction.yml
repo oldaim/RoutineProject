@@ -61,4 +61,4 @@ jobs:
         run: |
           aws s3 cp \
           --region ap-northeast-2 \
-          --acl private \ ./springboot-intro-build.zip s3://routineprojectbucket/
+          --acl private \ /home/runner/work/RoutineProject/RoutineProject/springboot-intro-build.zip s3://routineprojectbucket/
