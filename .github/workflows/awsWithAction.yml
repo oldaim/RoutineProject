@@ -73,5 +73,5 @@ jobs:
             --application-name RoutineProjectMaster \
             --deployment-group-name routine-deploy-group \
             --file-exists-behavior OVERWRITE \
-            --s3-location bucket=routineprojectbucket/deploy/,bundleType=zip,key=springboot-with-githubaction.zip \
+            --s3-location bucket=routineprojectbucket/deploy,bundleType=zip,key=springboot-with-githubaction.zip \
             --region ap-northeast-2
