@@ -68,9 +68,10 @@ jobs:
           AWS_REGION : ap-northeast-2
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_PW }}
-        run:  aws deploy create-deployment \
-                --application-name RoutinProjectMaster \
-                --deployment-group-name routine-deploy-group \
-                --file-exists-behavior OVERWRITE \
-                --s3-location bucket=routineprojectbucket,bundleType=zip,key=springboot-with-githubaction.zip \
-                --region ap-northeast-2
+        run: |
+          aws deploy create-deployment \
+            --application-name RoutinProjectMaster \
+            --deployment-group-name routine-deploy-group \
+            --file-exists-behavior OVERWRITE \
+            --s3-location bucket=routineprojectbucket,bundleType=zip,key=springboot-with-githubaction.zip \
+            --region ap-northeast-2
