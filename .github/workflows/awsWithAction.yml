@@ -48,6 +48,9 @@ jobs:
         
       - name: information about current file
         run: ls -la
+      
+      - name: information about current path
+        run: pwd
 
       # S3 Bucket으로 copy
       - name: Deliver to AWS S3
