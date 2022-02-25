@@ -47,7 +47,7 @@ jobs:
         run: zip -r -qq -j ./springboot-intro-build.zip ./deploy
         
       - name: information about current file
-        run: ll
+        run: ls -la
 
       # S3 Bucket으로 copy
       - name: Deliver to AWS S3
