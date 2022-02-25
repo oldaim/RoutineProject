@@ -43,7 +43,7 @@ jobs:
 
     # 파일 압축
       - name: Make zip file
-        run: zip -r ./springboor-with-githubaction.zip ./deploy
+        run: zip -r ./springboot-with-githubaction.zip ./deploy
     
       - name: find deploy
         run: |
@@ -60,6 +60,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_PW }}
         run: |
+          pwd
           aws s3 cp \
           --region ap-northeast-2 \
-          --acl private ./springboot-rp-build.zip s3://deploy/ 
+          --acl private ./springboot-with-githubaction.zip s3://deploy/ 
