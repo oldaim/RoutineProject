@@ -44,14 +44,6 @@ jobs:
     # 파일 압축
       - name: Make zip file
         run: zip -r ./springboot-with-githubaction.zip ./deploy
-    
-      - name: find deploy
-        run: |
-          pwd
-          ls -la
-          cd deploy
-          pwd
-          ls -la
 
       # S3 Bucket으로 copy
       - name: Deliver to AWS S3
@@ -63,4 +55,4 @@ jobs:
           pwd
           aws s3 cp \
           --region ap-northeast-2 \
-          --acl private ./springboot-with-githubaction.zip s3://deploy/ 
+          --acl private ./springboot-with-githubaction.zip s3://routineprojectbucket/deploy 
