@@ -55,4 +55,4 @@ jobs:
         run: |
           aws s3 cp \
           --region ap-northeast-2 \
-          --acl private deploy/springboot-rp-build.zip \ s3://deploy/ 
+          --acl private deploy/springboot-rp-build.zip s3://deploy/ 
