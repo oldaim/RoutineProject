@@ -36,7 +36,10 @@ jobs:
 
       # 압축파일 형태로 전달
       - name: Make zip file
-        run: zip -qq -r ./springboot-rp-build.zip 
+        run: |
+          zip -r ./springboot-rp-build.zip 
+          mkdir -p deploy
+          mv springboot-rp-build.zip deploy/springboot-rp-build.zip
 
 
       # S3 Bucket으로 copy
@@ -48,4 +51,4 @@ jobs:
         run: |
           aws s3 cp \
           --region ap-northeast-2 \
-          --acl private ./springboot-rp-build.zip \ s3://deploy/springboot-rp-build.zip 
+          --acl private deploy/springboot-rp-build.zip \ s3://deploy/springboot-rp-build.zip 
