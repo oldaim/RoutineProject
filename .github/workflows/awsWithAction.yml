@@ -70,7 +70,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_PW }}
         run: |
           aws deploy create-deployment \
-            --application-name RoutinProjectMaster \
+            --application-name RoutineProjectMaster \
             --deployment-group-name routine-deploy-group \
             --file-exists-behavior OVERWRITE \
             --s3-location bucket=routineprojectbucket,bundleType=zip,key=springboot-with-githubaction.zip \
