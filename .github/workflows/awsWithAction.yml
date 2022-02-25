@@ -49,6 +49,9 @@ jobs:
         run: |
           pwd
           ls -la
+          cd deploy
+          pwd
+          ls -la
 
       # S3 Bucket으로 copy
       - name: Deliver to AWS S3
@@ -57,7 +60,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_PW }}
         run: |
-          cd deploy
           aws s3 cp \
           --region ap-northeast-2 \
           --acl private ./springboot-rp-build.zip s3://deploy/ 
