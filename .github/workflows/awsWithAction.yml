@@ -40,8 +40,13 @@ jobs:
           cp scripts/*.sh before-deploy/
           cp appspec.yml before-deploy/
           cp build/libs/*.jar before-deploy/
+          pwd
+          ls -la
           zip -r before-deploy ./before-deploy
+          ls -la
           cd ../ && mkdir -p deploy
+          pwd
+          ls -la
           mv before-deploy.zip deploy/RoutineProject.zip
 
 
