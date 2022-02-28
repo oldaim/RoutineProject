@@ -41,7 +41,7 @@ jobs:
           cp appspec.yml before-deploy/
           cp build/libs/*.jar before-deploy/
           cd before-deploy
-          zip before deploy -r
+          zip before-deploy -r
           cd ../
           mkdir -p deploy
           mv before-deploy/before-deploy.zip deploy/RoutineProject.zip
