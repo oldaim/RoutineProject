@@ -34,18 +34,14 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build -x test
    
-        
-      - name: Copy appspec
-        run: |
-          mkdir -p deploy
-          cp ./appspec.yml ./deploy/
 
     # 파일 압축
       - name: Make zip file
         run: |
           pwd
           ls -la
-          zip -r ./RoutineProject
+          zip RoutineProject.zip -r ./*
+          mkdir -p deploy
           mv RoutineProject.zip deploy/RoutineProject.zip
 
       # S3 Bucket으로 copy
