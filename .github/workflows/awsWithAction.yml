@@ -55,7 +55,7 @@ jobs:
           ls -la
           aws s3 cp \
           --region ap-northeast-2 \
-          --acl private ./RoutineProject.zip s3://routineprojectbucket
+          --acl private deploy/RoutineProject.zip s3://routineprojectbucket
       
       - name: Code Deploy
         env:
