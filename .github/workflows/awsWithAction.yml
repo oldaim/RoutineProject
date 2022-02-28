@@ -44,7 +44,7 @@ jobs:
           ls -la
           zip -r before-deploy ./before-deploy
           ls -la
-          cd ../ && mkdir -p deploy
+          mkdir -p deploy
           pwd
           ls -la
           mv before-deploy.zip deploy/RoutineProject.zip
