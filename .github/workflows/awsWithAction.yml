@@ -43,7 +43,9 @@ jobs:
     # 파일 압축
       - name: Make zip file
         run: |
-          zip -r RoutineProject
+          pwd
+          ls -la
+          zip -r ./RoutineProject
           mv RoutineProject.zip deploy/RoutineProject.zip
 
       # S3 Bucket으로 copy
