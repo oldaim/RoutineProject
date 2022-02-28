@@ -33,16 +33,19 @@ jobs:
       # Build
       - name: Build with Gradle
         run: ./gradlew clean build -x test
-   
 
-    # 파일 압축
-      - name: Make zip file
+      - name: Make zip file(before-deploy)
         run: |
-          pwd
-          ls -la
-          zip RoutineProject.zip -r ./*
+          mkdir -p before-deploy
+          cp scripts/*.sh before-deploy/
+          cp appspec.yml before-deploy/
+          cp build/libs/*.jar before-deploy/
+          cd before-deploy
+          zip before deploy -r
+          cd ../
           mkdir -p deploy
-          mv RoutineProject.zip deploy/RoutineProject.zip
+          mv before-deploy/before-deploy.zip deploy/RoutineProject.zip
+
 
       # S3 Bucket으로 copy
       - name: Deliver to AWS S3
