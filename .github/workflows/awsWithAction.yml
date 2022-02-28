@@ -33,23 +33,18 @@ jobs:
       # Build
       - name: Build with Gradle
         run: ./gradlew clean build -x test
-     
-
-      - name: Make Directory
-        run: mkdir -p deploy
-
-    # Jar 파일 복사
-      - name: Copy Jar
-        run: cp ./build/libs/*.jar ./deploy
+   
         
       - name: Copy appspec
         run: |
-          ls -la
+          mkdir -p deploy
           cp ./appspec.yml ./deploy/
 
     # 파일 압축
       - name: Make zip file
-        run: zip -r ./springboot-with-githubaction.zip ./deploy
+        run: |
+          zip -r RoutineProject
+          mv RoutineProject.zip deploy/RoutineProject.zip
 
       # S3 Bucket으로 copy
       - name: Deliver to AWS S3
@@ -61,7 +56,7 @@ jobs:
           pwd
           aws s3 cp \
           --region ap-northeast-2 \
-          --acl private ./springboot-with-githubaction.zip s3://routineprojectbucket
+          --acl private ./RoutineProject.zip s3://routineprojectbucket
       
       - name: Code Deploy
         env:
@@ -73,5 +68,5 @@ jobs:
             --application-name RoutineProjectMaster \
             --deployment-group-name routine-deploy-group \
             --file-exists-behavior OVERWRITE \
-            --s3-location bucket=routineprojectbucket,bundleType=zip,key=springboot-with-githubaction.zip \
+            --s3-location bucket=routineprojectbucket,bundleType=zip,key=RoutineProject.zip \
             --region ap-northeast-2
