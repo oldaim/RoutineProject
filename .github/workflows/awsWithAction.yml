@@ -52,6 +52,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_PW }}
         run: |
           pwd
+          ls -la
           aws s3 cp \
           --region ap-northeast-2 \
           --acl private ./RoutineProject.zip s3://routineprojectbucket
