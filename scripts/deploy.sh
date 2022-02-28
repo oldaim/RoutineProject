@@ -30,4 +30,5 @@ echo "배포 애플리케이션 로그 기록"
 
 echo "> JAR Name: $JAR_NAME"
 
-nohup java -jar -Dspring.config.active=real-db $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
+nohup java -jar \ -Dspring.config.location=classpath:/application.yml,/home/ec2-user/app/step2/application-real-db.yml \
+\ $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
