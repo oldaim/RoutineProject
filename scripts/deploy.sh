@@ -25,3 +25,9 @@ fi
 echo "> 새 애플리케이션 배포"
 
 JAR_NAME=$(ls -tr $REPOSITORY/ | grep jar | tail -n 1)
+
+echo "배포 애플리케이션 로그 기록"
+
+echo "> JAR Name: $JAR_NAME"
+
+nohup java -jar $REPOSITORY/$JAR_NAME 2>&1 & #--spring.config.location=\classpath:/application-real-db.yml
